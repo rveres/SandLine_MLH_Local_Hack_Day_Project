@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../build/app');
 var debug = require('debug')('sandwich-order-app:server');
 var http = require('http');
 
