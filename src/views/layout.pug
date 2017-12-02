@@ -3,5 +3,21 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+
+    //- inject:css
+    //- endinject
+
+  body(ng-app="swOrder")
     block content
+    
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-resource.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(defer, src='//cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js')
+
+    //- inject:js
+    //- endinject
+
+    script(defer, src="/javascripts/main.js")
