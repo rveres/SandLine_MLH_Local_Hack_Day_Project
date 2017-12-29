@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "ng": "ng",
-    "start": "node ./bin/www && ng serve",
+    "start": "node server/server.js && ng serve",
     "serve": "ng serve",
     "nodestart": "node server/server.js",
     "dev": "concurrently --kill-others \"npm run serve\" \"npm run nodestart\"",
