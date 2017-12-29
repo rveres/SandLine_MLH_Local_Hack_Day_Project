@@ -2,11 +2,12 @@
   "name": "sand-line",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "server/server.js",
   "scripts": {
     "ng": "ng",
     "start": "node ./bin/www && ng serve",
     "serve": "ng serve",
-    "nodestart": "node ./bin/www",
+    "nodestart": "node .",
     "dev": "concurrently --kill-others \"npm run serve\" \"npm run nodestart\"",
     "build": "ng build --prod",
     "test": "ng test",
@@ -29,9 +30,16 @@
     "express": "^4.16.2",
     "morgan": "^1.9.0",
     "rxjs": "^5.5.2",
-    "serve-favicon": "^2.4.5",
     "zone.js": "^0.8.14",
-    "cookie-parser": "*"
+    "cookie-parser": "*",
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "helmet": "^1.3.0",
+    "loopback-boot": "^2.6.5",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^2.0.0",
+    "loopback-component-explorer": "^5.0.0",
+    "loopback": "^3.0.0"
   },
   "devDependencies": {
     "@angular/cli": "1.6.1",
@@ -53,6 +61,9 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "nsp": "^2.1.0"
   }
 }
