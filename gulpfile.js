@@ -10,16 +10,11 @@ var reload = browserSync.reload;
 var files = require('./gulp/gulp.config.js');
 
 gulp.task('default', function (callback) {
-    browserSync.init({
-        proxy: "localhost:800",
-        reloadDelay: 2500
-    });
-
     runSequence('build', callback);
 });
 
 gulp.task('build', function (callback) {
-    runSequence('clean', 'copy-build', 'reference', 'sass-watch', 'watch', callback);
+    runSequence('clean', 'copy-build', 'reference', 'sass-watch', callback);
 });
 
 gulp.task('copy-build', ['copy-app', 'copy-models', 'copy-public', 'copy-routes', 'copy-views', 'sass']);
