@@ -8,10 +8,19 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class LoginFlowComponent implements OnInit {
 
-  nameField = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  nameFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(5)
+  ]);
 
-  name = '';
-  id: number;
+  idFormControl = new FormControl('', [
+    Validators.required,
+    Validators.min(10000)
+  ]);
+
+  nameInput = '';
+  schoolIDInput: number;
+  sumbitDisable = 'disabled';
 
   constructor() { }
 
