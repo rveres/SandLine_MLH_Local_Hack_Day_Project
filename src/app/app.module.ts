@@ -10,11 +10,13 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MainFlowComponent } from './main-flow/main-flow.component';
+import { LoginFlowComponent } from './login-flow/login-flow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainFlowComponent
+    MainFlowComponent,
+    LoginFlowComponent
   ],
   imports: [
     BrowserModule,
