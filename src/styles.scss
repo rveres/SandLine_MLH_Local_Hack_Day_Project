@@ -3,6 +3,13 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('https://fonts.googleapis.com/css?family=Roboto:400');
 
+body, html {
+    min-height: 100%;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
+    background: url(./assets/bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }

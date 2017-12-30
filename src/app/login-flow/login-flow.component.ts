@@ -15,12 +15,12 @@ export class LoginFlowComponent implements OnInit {
 
   idFormControl = new FormControl('', [
     Validators.required,
-    Validators.min(10000)
+    Validators.min(10000),
+    Validators.max(90000)
   ]);
 
   nameInput = '';
   schoolIDInput: number;
-  sumbitDisable = 'disabled';
 
   constructor() { }
 
