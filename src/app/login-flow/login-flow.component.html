@@ -1,3 +1,21 @@
-<p>
-  login-flow works!
-</p>
+<mat-card class="loginCard">
+  <mat-card-title>
+    Login
+  </mat-card-title>
+  <mat-card-subtitle>
+    Login to your account
+  </mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field class="fullField">
+      <input matInput placeholder="Name">
+      <mat-hint align="start"><strong>Ensure you type firstnamelastname, like veresrobert</strong></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="fullField">
+      <input matInput placeholder="School Id">
+      <mat-hint align="start"><strong>Your School ID</strong></mat-hint>
+    </mat-form-field>
+  </mat-card-content>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</mat-card>
