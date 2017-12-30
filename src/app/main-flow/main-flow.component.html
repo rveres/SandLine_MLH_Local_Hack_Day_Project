@@ -4,23 +4,24 @@
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Fill out your name</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          <mat-form-field class="inputWidth">
+            <input matInput placeholder="Name" formControlName="firstCtrl" required>
+            <mat-hint align="start"><strong>Make sure it's in the form lastnamefirstname, like mackfreddie</strong> </mat-hint>
           </mat-form-field>
           <div>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperNext color="accent">Next</button>
           </div>
         </form>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Fill out your address</ng-template>
-          <mat-form-field>
+          <mat-form-field class="inputWidth">
             <input matInput placeholder="Address" formControlName="secondCtrl" required>
           </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperPrevious color="accent">Back</button>
+            <button mat-button matStepperNext color="accent">Next</button>
           </div>
         </form>
       </mat-step>
@@ -28,7 +29,7 @@
         <ng-template matStepLabel>Done</ng-template>
         You are now done.
         <div>
-          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperPrevious color="accent">Back</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
