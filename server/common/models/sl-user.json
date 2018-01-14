@@ -1,14 +1,17 @@
 {
-  "name": "person",
-  "plural": "people",
+  "name": "SLUser",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "firstname": {
+    "hash": {
       "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "number",
       "required": true
     }
   },

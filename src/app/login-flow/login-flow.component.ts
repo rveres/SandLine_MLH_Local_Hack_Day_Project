@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
+const sha256 = require('sha256');
+
 @Component({
   selector: 'app-login-flow',
   templateUrl: './login-flow.component.html',
@@ -21,6 +23,12 @@ export class LoginFlowComponent implements OnInit {
 
   nameInput = '';
   schoolIDInput: number;
+
+  loginSubmit() {
+
+    console.log(sha256(this.nameInput + this.schoolIDInput));
+
+  }
 
   constructor() { }
 

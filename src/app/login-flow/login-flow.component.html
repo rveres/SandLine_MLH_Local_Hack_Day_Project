@@ -32,5 +32,5 @@
     </mat-form-field>
   </mat-card-content>
 
-  <button mat-raised-button color="accent" type="submit" [disabled]="!nameFormControl.valid || !idFormControl.valid">Submit</button>
+  <button mat-raised-button color="accent" type="submit" [disabled]="!nameFormControl.valid || !idFormControl.valid" (click)="loginSubmit()">Submit</button>
 </mat-card>
