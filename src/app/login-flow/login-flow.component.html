@@ -9,7 +9,7 @@
     <mat-form-field class="fullField">
       <input matInput placeholder="Name" type="text" [formControl]="nameFormControl" [(ngModel)]="nameInput">
       <mat-hint align="start">
-        <strong>Ensure you type firstnamelastname, like veresrobert</strong>
+        <strong>Enter firstnamelastname</strong>
       </mat-hint>
       <mat-error *ngIf="nameFormControl.hasError('required')">
         Name is

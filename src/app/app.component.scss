@@ -9,8 +9,8 @@
   bottom: 3%;
   position: absolute;
   text-align: center;
-  padding-left: 30%;
-  padding-right: 25%;
+  padding-left: 40%;
+  padding-right: 40%;
   font-family: Courier New, Courier, monospace;
   color: #ffffff;
 }
@@ -32,4 +32,56 @@ a {
 a:hover {
   text-decoration: underline;
   color: #ffffff;
+}
+
+@media (min-width: 350px) and (max-width: 550px) {
+
+  .main-content {
+    padding-top: 25%;
+  }
+
+}
+
+@media (max-width: 725px) {
+
+  .nav-collpased {
+    display: inline-block;
+  }
+
+  .nav-expanded {
+    display: none;
+  }
+
+}
+
+@media (max-width: 475px) {
+
+  .ext-desc {
+    display: none;
+  }
+
+}
+
+@media (min-width: 725px) {
+
+  .nav-collapsed {
+    display: none;
+  }
+
+  .nav-expanded {
+    display: inline-block;
+  }
+
+}
+
+@media (min-width: 350px) and (max-width: 900px) {
+
+  .main-header {
+    font-size: 16px;
+  }
+
+  .navBtn {
+    font-size: 12px;
+  }
+
 }

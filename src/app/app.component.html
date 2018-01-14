@@ -1,12 +1,35 @@
 <div id="toolbar">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span><a routerLink="">SandwichLine:</a> Making ordering food that much easier.</span>
+      <span class="main-header">
+        <a routerLink="">SandwichLine</a><span class="ext-desc">: Making ordering food that much easier.</span></span>
       <span class="spacer"></span>
 
-      <button mat-button>About</button>
-      <button mat-button>Services</button>
-      <button mat-button>Contact</button>
+      <div class="nav-expanded">
+        <button mat-button class="navBtn">About</button>
+        <button mat-button class="navBtn">Services</button>
+        <button mat-button class="navBtn">Contact</button>
+      </div>
+
+      <div class="nav-collapsed">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voicemail</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
@@ -16,5 +39,5 @@
 </div>
 
 <div id="footer">
-  A Providence Day School project // Robert Veres & Joe Kerrigan // 2018
+  A Providence Day School project // 2018
 </div>
