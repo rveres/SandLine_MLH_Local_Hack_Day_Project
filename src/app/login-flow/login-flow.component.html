@@ -6,6 +6,9 @@
     Login to your account
   </mat-card-subtitle>
   <mat-card-content>
+    <mat-error *ngIf="errorIndicatorExist" class="comboError">
+      Incorrect Name & ID combination.
+    </mat-error>
     <mat-form-field class="fullField">
       <input matInput placeholder="Name" type="text" [formControl]="nameFormControl" [(ngModel)]="nameInput">
       <mat-hint align="start">
@@ -32,5 +35,6 @@
     </mat-form-field>
   </mat-card-content>
 
-  <button mat-raised-button color="accent" type="submit" [disabled]="!nameFormControl.valid || !idFormControl.valid" (click)="loginSubmit()">Submit</button>
+  <button mat-raised-button color="accent" type="submit" [disabled]="!nameFormControl.valid || !idFormControl.valid || working"
+    (click)="loginSubmit()">Submit</button>
 </mat-card>
