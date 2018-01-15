@@ -13,13 +13,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainFlowComponent } from './main-flow/main-flow.component';
 import { LoginFlowComponent } from './login-flow/login-flow.component';
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
+import { DoneFlowComponent } from './done-flow/done-flow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainFlowComponent,
     LoginFlowComponent,
-    AdminDashComponent
+    AdminDashComponent,
+    DoneFlowComponent
   ],
   imports: [
     BrowserModule,
