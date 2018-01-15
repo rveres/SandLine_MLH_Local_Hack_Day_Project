@@ -66,12 +66,6 @@ export class MainFlowComponent implements OnInit {
       }
     }
 
-    console.log(JSON.stringify({
-      'hash': Cookies.get('hashid'),
-      'status': 0,
-      'toppings': this.toppingsSelectedStrings
-    });
-
     this.http.post('http://localhost:3000/api/orders', JSON.stringify({
       'hash': Cookies.get('hashid'),
       'status': 0,
