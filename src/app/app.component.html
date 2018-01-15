@@ -8,11 +8,11 @@
       <span class="spacer"></span>
 
       <div class="nav-expanded">
-        <button mat-button class="navBtn">
-          <a routerLink="">Home</a>
+        <button mat-button routerLink="" class="navBtn">
+          <a>Home</a>
         </button>
-        <button mat-button class="navBtn">
-          <a routerLink="order" (click)="checkAuth()">Order</a>
+        <button mat-button routerLink="order" (click)="checkAuth()" class="navBtn">
+          <a>Order</a>
         </button>
       </div>
 
@@ -21,13 +21,13 @@
           <mat-icon>more_horiz</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item routerLink="">
             <mat-icon>home</mat-icon>
-            <span routerLink="">Home</span>
+            <span>Home</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item routerLink="order" (click)="checkAuth()">
             <mat-icon>input</mat-icon>
-            <span routerLink="order" (click)="checkAuth()">Order</span>
+            <span>Order</span>
           </button>
         </mat-menu>
       </div>
