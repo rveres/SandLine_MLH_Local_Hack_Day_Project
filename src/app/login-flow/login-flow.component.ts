@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 declare var Cookies: any;
 
 import * as sha256 from 'sha256';
-
+import { adminHash } from '../../../appConfig.config';
 
 @Component({
   selector: 'app-login-flow',
@@ -41,8 +41,14 @@ export class LoginFlowComponent implements OnInit {
     this.sha256Filter = sha256(this.nameInput + this.schoolIDInput);
 
     this.http.get('http://localhost:3000/api/SLUsers/findOne?filter[where][hash]=' + this.sha256Filter).subscribe(data => {
-      Cookies.set('hashid', data, { expires: new Date(new Date().getTime() + 30 * 60 * 1000) });
-      this.router.navigateByUrl('/order');
+      Cookies.set('hashid', data.hash, { expires: new Date(new Date().getTime() + 30 * 60 * 1000) });
+
+      if (data.hash === adminHash) {
+        this.router.navigateByUrl('/admin');
+      } else {
+        this.router.navigateByUrl('/order');
+      }
+
     }, err => {
       this.errorIndicatorExist = true;
     });
