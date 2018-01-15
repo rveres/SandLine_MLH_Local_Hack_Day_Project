@@ -65,5 +65,3 @@ export class LoginFlowComponent implements OnInit {
     }
   }
 }
-
-}

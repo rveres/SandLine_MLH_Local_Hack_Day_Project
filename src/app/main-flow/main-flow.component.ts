@@ -84,7 +84,8 @@ export class MainFlowComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(ErrorDialogComponent, {
       height: '150px',
-      width: '300px'
+      width: '300px',
+      data: { error: 'There was an error processing your request.' },
     });
 
     dialogRef.afterClosed().subscribe(result => {
