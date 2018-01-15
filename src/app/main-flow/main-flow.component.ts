@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-main-flow',
@@ -14,27 +14,50 @@ export class MainFlowComponent implements OnInit {
   selectedType: string;
   toppingsSelected: boolean[];
 
-  onSandOptionsChanges(): void {
+  sandTypeErrorExist: boolean;
+  sandToppingErrorExist: boolean;
+
+  onSandTypeChanges(): void {
     this.sandOptions.valueChanges.subscribe(val => {
       this.selectedType = val.selectedSandType;
       if (val.selectedSandType === 'ham') {
         this.toppingsSelected = [true, false, false, false, false, false, false];
+        this.sandTypeErrorExist = false;
       } else if (val.selectedSandType === 'turkey') {
         this.toppingsSelected = [false, true, false, false, false, false, false];
+        this.sandTypeErrorExist = false;
       } else if (val.selectedSandType === 'chicken') {
         this.toppingsSelected = [false, false, true, false, false, false, false];
+        this.sandTypeErrorExist = false;
       } else if (val.selectedSandType === 'veggie') {
         this.toppingsSelected = [false, false, false, false, true, true, false];
+        this.sandTypeErrorExist = false;
       } else if (val.selectedSandType === 'custom') {
         this.toppingsSelected = [false, false, false, false, false, false, false];
+        this.sandTypeErrorExist = false;
+      } else {
+        this.sandTypeErrorExist = true;
       }
     });
+  }
+
+  onSandToppingsChanges(): void {
+    this.sandToppingErrorExist = true;
+
+    for (const topping of this.toppingsSelected) {
+      if (topping === true) {
+        this.sandToppingErrorExist = false;
+      }
+    }
   }
 
   constructor(private _formBuilder: FormBuilder) {
     this.toppingsOptions = ['Ham', 'Turkey', 'Chicken', 'Cheese', 'Lettuce', 'Tomatoes', 'Mustard'];
 
-    this.toppingsSelected = [true, false, false, false, false, false, false];
+    this.toppingsSelected = [false, false, false, false, false, false, false];
+
+    this.sandTypeErrorExist = true;
+    this.sandToppingErrorExist = true;
 
     this.sandOptions = _formBuilder.group({
       hideRequired: false,
@@ -42,10 +65,11 @@ export class MainFlowComponent implements OnInit {
         Validators.required,
       ]),
     });
-   }
+  }
 
   ngOnInit() {
-    this.onSandOptionsChanges();
+    this.onSandTypeChanges();
+    this.onSandToppingsChanges();
   }
 
 }

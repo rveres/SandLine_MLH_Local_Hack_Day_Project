@@ -14,25 +14,31 @@
             </mat-radio-group>
           </div>
           <div>
-            <button mat-button matStepperNext color="accent">Next</button>
+            <button mat-button matStepperNext color="primary">Next</button>
           </div>
         </form>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Select the type of sandwich you want</ng-template>
+        <ng-template matStepLabel>Select the toppings you want</ng-template>
         <div class="checkboxList">
-          <mat-checkbox *ngFor="let topping of toppingsOptions;let i=index" [disabled]="selectedType == (toppingsOptions[i] | lowercase)" class="checkBox" [(ngModel)]="toppingsSelected[i]">{{ toppingsOptions[i] }}</mat-checkbox>
+          <mat-checkbox *ngFor="let topping of toppingsOptions;let i=index" [disabled]="selectedType == (toppingsOptions[i] | lowercase)"
+            class="checkBox" [(ngModel)]="toppingsSelected[i]" (change)="onSandToppingsChanges()">{{ toppingsOptions[i] }}</mat-checkbox>
         </div>
         <div>
-          <button mat-button matStepperPrevious color="accent">Back</button>
-          <button mat-button matStepperNext color="accent">Next</button>
+          <button mat-button matStepperPrevious color="primary">Back</button>
+          <button mat-button matStepperNext color="primary">Next</button>
         </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        You are now done.
+        <ng-template matStepLabel>Finish</ng-template>
+        <mat-error *ngIf="sandTypeErrorExist">
+          You have to pick a sandwich type.
+          <br>
+        </mat-error>
+        <mat-error *ngIf="sandToppingErrorExist"> You have to pick at least one topping.</mat-error>
+        <span *ngIf="!sandTypeErrorExist && !sandToppingErrorExist">Make sure you've picked everything you want, then hit finish!</span>
         <div>
-          <button mat-button matStepperPrevious color="accent">Back</button>
+          <button mat-button matStepperPrevious color="primary" [disabled]="sandTypeErrorExist || sandToppingErrorExist">Submit</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
