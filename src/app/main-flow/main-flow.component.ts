@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+declare var Cookies: any;
 
 @Component({
   selector: 'app-main-flow',
@@ -13,6 +17,7 @@ export class MainFlowComponent implements OnInit {
 
   selectedType: string;
   toppingsSelected: boolean[];
+  toppingsSelectedStrings: string[];
 
   sandTypeErrorExist: boolean;
   sandToppingErrorExist: boolean;
@@ -38,6 +43,7 @@ export class MainFlowComponent implements OnInit {
       } else {
         this.sandTypeErrorExist = true;
       }
+      this.onSandToppingsChanges();
     });
   }
 
@@ -51,7 +57,33 @@ export class MainFlowComponent implements OnInit {
     }
   }
 
-  constructor(private _formBuilder: FormBuilder) {
+  orderSubmit(): void {
+    this.toppingsSelectedStrings = [];
+
+    for (const i in this.toppingsSelected) {
+      if (this.toppingsSelected[i] === true) {
+        this.toppingsSelectedStrings.push(this.toppingsOptions[i]);
+      }
+    }
+
+    console.log(JSON.stringify({
+      'hash': Cookies.get('hashid'),
+      'status': 0,
+      'toppings': this.toppingsSelectedStrings
+    });
+
+    this.http.post('http://localhost:3000/api/orders', JSON.stringify({
+      'hash': Cookies.get('hashid'),
+      'status': 0,
+      'toppings': this.toppingsSelectedStrings
+    }), {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    }).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  constructor(private http: HttpClient, private _formBuilder: FormBuilder, private _router: Router) {
     this.toppingsOptions = ['Ham', 'Turkey', 'Chicken', 'Cheese', 'Lettuce', 'Tomatoes', 'Mustard'];
 
     this.toppingsSelected = [false, false, false, false, false, false, false];
@@ -68,6 +100,10 @@ export class MainFlowComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (Cookies.get('hashid') == null) {
+      this._router.navigateByUrl('');
+    }
+
     this.onSandTypeChanges();
     this.onSandToppingsChanges();
   }

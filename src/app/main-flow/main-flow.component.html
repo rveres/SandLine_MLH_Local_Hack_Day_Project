@@ -38,7 +38,7 @@
         <mat-error *ngIf="sandToppingErrorExist"> You have to pick at least one topping.</mat-error>
         <span *ngIf="!sandTypeErrorExist && !sandToppingErrorExist">Make sure you've picked everything you want, then hit finish!</span>
         <div>
-          <button mat-button matStepperPrevious color="primary" [disabled]="sandTypeErrorExist || sandToppingErrorExist">Submit</button>
+          <button mat-button color="primary" [disabled]="sandTypeErrorExist || sandToppingErrorExist" (click)="orderSubmit()">Submit</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
