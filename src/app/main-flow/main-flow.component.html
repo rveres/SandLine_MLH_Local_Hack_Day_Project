@@ -1,29 +1,32 @@
 <mat-card class="stepperContainer">
   <div>
     <mat-vertical-stepper>
-      <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Fill out your name</ng-template>
-          <mat-form-field class="inputWidth">
-            <input matInput placeholder="Name" formControlName="firstCtrl" required>
-            <mat-hint align="start"><strong>Make sure it's in the form lastnamefirstname, like mackfreddie</strong> </mat-hint>
-          </mat-form-field>
+      <mat-step [stepControl]="sandOptions">
+        <form [formGroup]="sandOptions">
+          <ng-template matStepLabel>Select the type of sandwich you want</ng-template>
+          <div>
+            <mat-radio-group formControlName="selectedSandType" [(ngModel)]="selectedType" class="radioGroup" required>
+              <mat-radio-button value="ham" class="radioBtn">Ham</mat-radio-button>
+              <mat-radio-button value="turkey" class="radioBtn">Turkey</mat-radio-button>
+              <mat-radio-button value="chicken" class="radioBtn">Chicken</mat-radio-button>
+              <mat-radio-button value="veggie" class="radioBtn">Veggie</mat-radio-button>
+              <mat-radio-button value="custom" class="radioBtn">Custom</mat-radio-button>
+            </mat-radio-group>
+          </div>
           <div>
             <button mat-button matStepperNext color="accent">Next</button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Fill out your address</ng-template>
-          <mat-form-field class="inputWidth">
-            <input matInput placeholder="Address" formControlName="secondCtrl" required>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious color="accent">Back</button>
-            <button mat-button matStepperNext color="accent">Next</button>
-          </div>
-        </form>
+      <mat-step>
+        <ng-template matStepLabel>Select the type of sandwich you want</ng-template>
+        <div class="checkboxList">
+          <mat-checkbox *ngFor="let topping of toppingsOptions;let i=index" [disabled]="selectedType == (toppingsOptions[i] | lowercase)" class="checkBox" [(ngModel)]="toppingsSelected[i]">{{ toppingsOptions[i] }}</mat-checkbox>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious color="accent">Back</button>
+          <button mat-button matStepperNext color="accent">Next</button>
+        </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>

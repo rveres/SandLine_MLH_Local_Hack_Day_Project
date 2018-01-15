@@ -16,5 +16,9 @@
   "SLUser": {
     "dataSource": "db",
     "public": true
+  },
+  "order": {
+    "dataSource": "db",
+    "public": true
   }
 }

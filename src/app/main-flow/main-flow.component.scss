@@ -6,3 +6,12 @@
 .inputWidth {
     width: 80%;
 }
+
+.radioGroup, .checkboxList {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.radioBtn {
+    padding: 7%;
+}
