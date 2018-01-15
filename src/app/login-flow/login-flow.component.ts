@@ -40,7 +40,7 @@ export class LoginFlowComponent implements OnInit {
 
     this.sha256Filter = sha256(this.nameInput + this.schoolIDInput);
 
-    this.http.get('http://localhost:3000/api/SLUsers/findOne?filter[where][hash]=' + this.sha256Filter).subscribe(data => {
+    this._http.get('http://localhost:3000/api/SLUsers/findOne?filter[where][hash]=' + this.sha256Filter).subscribe(data => {
       Cookies.set('hashid', data.hash, { expires: new Date(new Date().getTime() + 30 * 60 * 1000) });
 
       if (data.hash === adminHash) {
@@ -57,7 +57,7 @@ export class LoginFlowComponent implements OnInit {
 
   }
 
-  constructor(private http: HttpClient, router: Router) { this.router = router; }
+  constructor(private _http: HttpClient, router: Router) { this.router = router; }
 
   ngOnInit() {
   }

@@ -66,7 +66,7 @@ export class MainFlowComponent implements OnInit {
       }
     }
 
-    this.http.post('http://localhost:3000/api/orders', JSON.stringify({
+    this._http.post('http://localhost:3000/api/orders', JSON.stringify({
       'hash': Cookies.get('hashid'),
       'status': 0,
       'toppings': this.toppingsSelectedStrings
@@ -77,7 +77,7 @@ export class MainFlowComponent implements OnInit {
     });
   }
 
-  constructor(private http: HttpClient, private _formBuilder: FormBuilder, private _router: Router) {
+  constructor(private _http: HttpClient, private _formBuilder: FormBuilder, private _router: Router) {
     this.toppingsOptions = ['Ham', 'Turkey', 'Chicken', 'Cheese', 'Lettuce', 'Tomatoes', 'Mustard'];
 
     this.toppingsSelected = [false, false, false, false, false, false, false];
