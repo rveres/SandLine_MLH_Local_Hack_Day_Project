@@ -1,0 +1,44 @@
+.doneCard {
+    margin: 0 auto;
+    width: 35%;
+    height: 40%;
+    text-align: center;
+}
+
+.checkIcon {
+    font-size: 56px;
+    padding-right: 12%;
+}
+
+@media (min-width: 350px) and (max-width: 700px) {
+
+    .doneCard {
+        margin: 0 auto;
+        width: 70%;
+        height: 40%;
+        text-align: center;
+    }
+
+}
+
+@media (min-width: 350px) and (max-width: 700px) {
+
+    .doneCard {
+        margin: 0 auto;
+        width: 70%;
+        height: 40%;
+        text-align: center;
+    }
+
+}
+
+@media (min-width: 1500px) {
+
+    .doneCard {
+        margin: 0 auto;
+        width: 30%;
+        height: 40%;
+        text-align: center;
+    }
+
+}

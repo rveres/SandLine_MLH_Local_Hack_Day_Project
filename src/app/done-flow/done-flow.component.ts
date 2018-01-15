@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+declare var Cookies: any;
 
 @Component({
   selector: 'app-done-flow',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoneFlowComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
+    if (Cookies.get('hashid') == null) {
+      this._router.navigateByUrl('');
+    } else {
+      Cookies.remove('hashid');
+    }
   }
-
 }

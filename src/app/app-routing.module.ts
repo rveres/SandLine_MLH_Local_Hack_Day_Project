@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainFlowComponent } from './main-flow/main-flow.component';
 import { LoginFlowComponent } from './login-flow/login-flow.component';
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
+import { DoneFlowComponent } from './done-flow/done-flow.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,14 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashComponent
+  },
+  {
+    path: 'done',
+    component: DoneFlowComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

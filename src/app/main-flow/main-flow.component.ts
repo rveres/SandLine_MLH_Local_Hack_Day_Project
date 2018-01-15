@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 declare var Cookies: any;
 
@@ -73,11 +75,24 @@ export class MainFlowComponent implements OnInit {
     }), {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     }).subscribe(data => {
-      console.log(data);
+      this._router.navigateByUrl('done');
+    }, err => {
+      this.openDialog();
     });
   }
 
-  constructor(private _http: HttpClient, private _formBuilder: FormBuilder, private _router: Router) {
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
+      height: '150px',
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this._router.navigateByUrl('');
+    });
+  }
+
+  constructor(private _http: HttpClient, private _formBuilder: FormBuilder, private _router: Router, public dialog: MatDialog) {
     this.toppingsOptions = ['Ham', 'Turkey', 'Chicken', 'Cheese', 'Lettuce', 'Tomatoes', 'Mustard'];
 
     this.toppingsSelected = [false, false, false, false, false, false, false];

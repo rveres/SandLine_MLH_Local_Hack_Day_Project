@@ -14,6 +14,7 @@ import { MainFlowComponent } from './main-flow/main-flow.component';
 import { LoginFlowComponent } from './login-flow/login-flow.component';
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
 import { DoneFlowComponent } from './done-flow/done-flow.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DoneFlowComponent } from './done-flow/done-flow.component';
     MainFlowComponent,
     LoginFlowComponent,
     AdminDashComponent,
-    DoneFlowComponent
+    DoneFlowComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,9 @@ import { DoneFlowComponent } from './done-flow/done-flow.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
+  ],
+  entryComponents: [
+    ErrorDialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

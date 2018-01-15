@@ -60,6 +60,10 @@ export class LoginFlowComponent implements OnInit {
   constructor(private _http: HttpClient, router: Router) { this.router = router; }
 
   ngOnInit() {
+    if (Cookies.get('hashid') != null) {
+      Cookies.remove('hashid');
+    }
   }
+}
 
 }
