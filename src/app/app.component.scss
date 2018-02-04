@@ -3,6 +3,8 @@
     left: 0px;
     width: 100%;
     position: fixed;
+    background-color: transparent;
+    background: transparent;
 }
 
 #footer {
@@ -23,9 +25,18 @@
   padding-right: 7%;
 }
 
+.main-header {
+  padding-left: 2%;
+}
+
 .main-content {
   margin: 0 auto;
   padding-top: 15%;
+}
+
+.transparent {
+  background: transparent;
+  background-color: transparent;
 }
 
 a {
