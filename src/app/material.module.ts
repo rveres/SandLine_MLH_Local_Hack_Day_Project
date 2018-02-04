@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatToolbarModule, MatStepperModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatToolbarModule, MatStepperModule, MatFormFieldModule, MatInputModule, MatCardModule,
+MatPaginatorModule, MatSortModule, MatProgressSpinnerModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
@@ -21,7 +22,10 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatRadioModule,
         MatCheckboxModule,
         MatTableModule,
-        MatDialogModule
+        MatDialogModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         MatButtonModule,
@@ -35,7 +39,10 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatRadioModule,
         MatCheckboxModule,
         MatTableModule,
-        MatDialogModule
+        MatDialogModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatProgressSpinnerModule
     ]
 })
 
