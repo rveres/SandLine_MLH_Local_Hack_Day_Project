@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { merge } from 'rxjs/observable/merge';
 import { of as observableOf } from 'rxjs/observable/of';
@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators/catchError';
 import { map } from 'rxjs/operators/map';
 import { startWith } from 'rxjs/operators/startWith';
 import { switchMap } from 'rxjs/operators/switchMap';
+import { WarnDialogComponent } from '../warn-dialog/warn-dialog.component';
 
 declare var Cookies: any;
 
@@ -32,8 +33,6 @@ export class AdminDashComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private _http: HttpClient, private _router: Router, private _changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -104,6 +103,17 @@ export class AdminDashComponent implements OnInit, AfterViewInit {
     });
 
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(WarnDialogComponent, {
+      height: '150px',
+      width: '300px',
+      data: {}
+    });
+  }
+
+  constructor(private _http: HttpClient, private _router: Router, private _changeDetectorRef: ChangeDetectorRef,  
+    public dialog: MatDialog) { }
 
 }
 

@@ -7,6 +7,10 @@
             </div>
         </div>
 
+        <div class="mainOperationButtons">
+            <button mat-raised-button color="warn" (click)="openDialog()">Delete all</button>
+        </div>
+
         <mat-table #table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
 
             <ng-container matColumnDef="created">
