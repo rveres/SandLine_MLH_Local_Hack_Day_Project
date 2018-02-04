@@ -1,14 +1,13 @@
 <div class="container">
+    <div class="mainOperationButtons">
+        <button mat-raised-button color="warn" (click)="openDialog()">Delete all</button>
+    </div>
     <div class="example-container mat-elevation-z8">
         <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
             <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
             <div class="example-rate-limit-reached" *ngIf="errorExist">
                 There was an error loading the data.
             </div>
-        </div>
-
-        <div class="mainOperationButtons">
-            <button mat-raised-button color="warn" (click)="openDialog()">Delete all</button>
         </div>
 
         <mat-table #table [dataSource]="dataSource" class="example-table" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">

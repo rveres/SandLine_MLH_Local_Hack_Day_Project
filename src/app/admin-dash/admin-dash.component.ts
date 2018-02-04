@@ -112,7 +112,7 @@ export class AdminDashComponent implements OnInit, AfterViewInit {
     });
   }
 
-  constructor(private _http: HttpClient, private _router: Router, private _changeDetectorRef: ChangeDetectorRef,  
+  constructor(private _http: HttpClient, private _router: Router, private _changeDetectorRef: ChangeDetectorRef,
     public dialog: MatDialog) { }
 
 }
