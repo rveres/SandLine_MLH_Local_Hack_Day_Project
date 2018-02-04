@@ -31,7 +31,8 @@
 
 .main-content {
   margin: 0 auto;
-  padding-top: 15%;
+  padding-top: 8%;
+  padding-bottom: 10%;
 }
 
 .transparent {
@@ -53,6 +54,14 @@ a:hover {
 
   .main-content {
     padding-top: 25%;
+  }
+
+}
+
+@media (max-width: 1200px) {
+
+  .main-content {
+    padding-top: 15%;
   }
 
 }

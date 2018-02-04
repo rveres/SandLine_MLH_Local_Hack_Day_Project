@@ -1,14 +1,14 @@
-import {Component, OnInit, AfterViewInit,  ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
-import {merge} from 'rxjs/observable/merge';
-import {of as observableOf} from 'rxjs/observable/of';
-import {catchError} from 'rxjs/operators/catchError';
-import {map} from 'rxjs/operators/map';
-import {startWith} from 'rxjs/operators/startWith';
-import {switchMap} from 'rxjs/operators/switchMap';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { merge } from 'rxjs/observable/merge';
+import { of as observableOf } from 'rxjs/observable/of';
+import { catchError } from 'rxjs/operators/catchError';
+import { map } from 'rxjs/operators/map';
+import { startWith } from 'rxjs/operators/startWith';
+import { switchMap } from 'rxjs/operators/switchMap';
 
 declare var Cookies: any;
 
@@ -22,18 +22,18 @@ import { adminHash } from '../../../appConfig.config';
 export class AdminDashComponent implements OnInit, AfterViewInit {
   orderData: any;
 
-  displayedColumns = ['created', 'status', 'toppings'];
+  displayedColumns = ['created', 'toppings', 'operations'];
   ordersData: OrdersDatabase | null;
   dataSource = new MatTableDataSource();
 
   resultsLength = 0;
   isLoadingResults = true;
-  isRateLimitReached = false;
+  errorExist = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _http: HttpClient, private _router: Router) {}
+  constructor(private _http: HttpClient, private _router: Router, private _changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -44,31 +44,27 @@ export class AdminDashComponent implements OnInit, AfterViewInit {
     }
 
     this.ordersData = new OrdersDatabase(this._http);
-
-    // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.ordersData.getOrders(this.sort.direction);
-        }),
-        map(data => {
-          console.log(data);
-          this.isLoadingResults = false;
-          this.isRateLimitReached = false;
-          this.resultsLength = data.orders.length;
+      startWith({}),
+      switchMap(() => {
+        this.isLoadingResults = true;
+        return this.ordersData.getOrders(this.sort.direction);
+      }),
+      map(data => {
+        this.isLoadingResults = false;
+        this.errorExist = false;
+        this.resultsLength = data.length;
 
-          return data.orders;
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
-          this.isRateLimitReached = true;
-          return observableOf([]);
-        })
+        return data;
+      }),
+      catchError(() => {
+        this.isLoadingResults = false;
+        this.errorExist = true;
+        return observableOf([]);
+      })
       ).subscribe(data => this.dataSource.data = data);
   }
 
@@ -78,22 +74,50 @@ export class AdminDashComponent implements OnInit, AfterViewInit {
 
   }
 
-}
+  deleteOrder(id: number) {
 
-export interface OrderApi {
-  orders: SandOrder[];
+    this.isLoadingResults = true;
+
+    this._http.delete('http://localhost:3000/api/orders/' + id).subscribe(data => {
+
+      const newDataSource = this.dataSource.data;
+
+      for (const orderIndex in this.dataSource.data) {
+        if (this.dataSource.data[+orderIndex].id === id) {
+          newDataSource.splice(+orderIndex, 1);
+        }
+      }
+
+      this.dataSource.data = newDataSource;
+
+      this.resultsLength = this.dataSource.data.length;
+      this.isLoadingResults = false;
+
+      this._changeDetectorRef.detectChanges();
+
+      console.log('success');
+
+    }, err => {
+      this.errorExist = true;
+
+      console.log('there was an error');
+    });
+
+  }
+
 }
 
 export interface SandOrder {
+  id: number;
   status: number;
   toppings: string[];
   created: Date;
 }
 
 export class OrdersDatabase {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
-  getOrders(order: string): Observable<OrderApi> {
+  getOrders(order: string): Observable<SandOrder[]> {
     const href = 'http://localhost:3000/api/orders';
 
     if (order === '' || order == null) {
@@ -101,8 +125,9 @@ export class OrdersDatabase {
     }
 
     const requestUrl =
-        `${href}?filter[order]=createdAt%20${order}`;
+      `${href}?filter[order]=createdAt%20${order}&filter[where][status]=0`;
 
-    return this._http.get<OrderApi>(requestUrl);
+    return this._http.get<SandOrder[]>(requestUrl);
   }
+
 }
