@@ -22,7 +22,7 @@ import { adminHash } from '../../../appConfig.config';
 export class AdminDashComponent implements OnInit, AfterViewInit {
   orderData: any;
 
-  displayedColumns = ['created', 'state', 'number', 'title'];
+  displayedColumns = ['created', 'status', 'toppings'];
   ordersData: OrdersDatabase | null;
   dataSource = new MatTableDataSource();
 
@@ -53,17 +53,15 @@ export class AdminDashComponent implements OnInit, AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          console.log(this.sort.direction);
-          return this.ordersData.getOrders(
-            this.sort.active, this.sort.direction, this.paginator.pageIndex);
+          return this.ordersData.getOrders(this.sort.direction);
         }),
         map(data => {
-          // Flip flag to show that loading has finished.
+          console.log(data);
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          this.resultsLength = data.total_count;
+          this.resultsLength = data.orders.length;
 
-          return data.items;
+          return data.orders;
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -82,26 +80,29 @@ export class AdminDashComponent implements OnInit, AfterViewInit {
 
 }
 
-export interface GithubApi {
-  items: GithubIssue[];
-  total_count: number;
+export interface OrderApi {
+  orders: SandOrder[];
 }
 
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
+export interface SandOrder {
+  status: number;
+  toppings: string[];
+  created: Date;
 }
 
 export class OrdersDatabase {
   constructor(private _http: HttpClient) {}
 
-  getOrders(sort: string, order: string, page: number): Observable<GithubApi> {
-    const href = 'https://api.github.com/search/issues';
-    const requestUrl =
-        `${href}?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}`;
+  getOrders(order: string): Observable<OrderApi> {
+    const href = 'http://localhost:3000/api/orders';
 
-    return this._http.get<GithubApi>(requestUrl);
+    if (order === '' || order == null) {
+      order = 'desc';
+    }
+
+    const requestUrl =
+        `${href}?filter[order]=createdAt%20${order}`;
+
+    return this._http.get<OrderApi>(requestUrl);
   }
 }
